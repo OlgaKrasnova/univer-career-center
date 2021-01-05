@@ -41,6 +41,7 @@ class Employer(models.Model):
 
 
 class Vacancies(models.Model):
+    image = models.ImageField("Изображение", upload_to="media/", null=True)
     title = models.CharField("Название", max_length=150)
     description = models.TextField("Описание")
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
@@ -68,8 +69,8 @@ class Graduate(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Степень"
-        verbose_name_plural = "Данные о степени"
+        verbose_name = "Выпускник"
+        verbose_name_plural = "Выпускники"
 
 
 class Resume(models.Model):
