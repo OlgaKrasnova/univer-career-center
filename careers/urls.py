@@ -4,7 +4,8 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path("", views.VacanciesView.as_view())
+    path("", views.VacanciesView.as_view()),
+    path("vacancies/", views.VacanciesListAPIView.as_view()),
 ]
 
 if settings.DEBUG:
