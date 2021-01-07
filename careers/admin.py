@@ -1,5 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+from django.utils.safestring import mark_safe
 from .models import DiplomaThesis, Graduate, Resume, Vacancies, Employer, Practice, Events, RequestForPractice, \
     Students, Profession
 
@@ -12,14 +13,22 @@ class ResumeInline(admin.TabularInline):
     model = Resume
     extra = 1
     readonly_fields = ("title", "target", "experience", "skills", "id_graduate")
+    save_on_top = True
 
 
 @admin.register(Vacancies)
 class VacanciesAdmin(ImportExportModelAdmin):
-    list_display = ("image", "title", "description", "id_employer")
+    list_display = ("get_image", "title", "description", "id_employer")
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="60" height="50"')
+
+    get_image.short_description = "Изображение"
+
     list_display_links = ("title",)
     inlines = [ResumeInline]
-    pass
+
+
 
 
 admin.site.register(Employer)
