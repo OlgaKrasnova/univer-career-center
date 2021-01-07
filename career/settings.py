@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+    'import_export',
     'careers'
 ]
 
@@ -117,6 +118,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
