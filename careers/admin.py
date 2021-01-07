@@ -8,10 +8,17 @@ admin.site.register(Graduate)
 admin.site.register(Resume)
 
 
+class ResumeInline(admin.TabularInline):
+    model = Resume
+    extra = 1
+    readonly_fields = ("title", "target", "experience", "skills", "id_graduate")
+
+
 @admin.register(Vacancies)
 class VacanciesAdmin(ImportExportModelAdmin):
     list_display = ("image", "title", "description", "id_employer")
     list_display_links = ("title",)
+    inlines = [ResumeInline]
     pass
 
 
