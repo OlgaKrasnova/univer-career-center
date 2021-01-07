@@ -11,6 +11,7 @@ admin.site.register(Resume)
 @admin.register(Vacancies)
 class VacanciesAdmin(ImportExportModelAdmin):
     list_display = ("image", "title", "description", "id_employer")
+    list_display_links = ("title",)
     pass
 
 
@@ -25,5 +26,14 @@ class PracticeAdmin(ImportExportModelAdmin):
 
 admin.site.register(Events)
 admin.site.register(RequestForPractice)
-admin.site.register(Students)
+
+
+@admin.register(Students)
+class StudentsAdmin(ImportExportModelAdmin):
+    list_display = ("surname", "name", "patronymic", "year_of_issue", "id_profession")
+    list_filter = ("year_of_issue", "id_profession")
+    search_fields = ("surname", "name")
+    pass
+
+
 admin.site.register(Profession)
