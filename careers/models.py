@@ -118,9 +118,9 @@ class Practice(models.Model):
 
 
 class Students(models.Model):
+    surname = models.CharField("Фамилия", max_length=150)
     name = models.CharField("Имя", max_length=150)
     patronymic = models.CharField("Отчество", max_length=150)
-    surname = models.CharField("Фамилия", max_length=150)
     year_of_issue = models.PositiveSmallIntegerField("Год выпуска", default=0)
     login = models.CharField("Логин", max_length=150)
     password = models.CharField("Пароль", max_length=150)
