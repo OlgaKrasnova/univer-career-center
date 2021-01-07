@@ -46,9 +46,6 @@ class Vacancies(models.Model):
     description = models.TextField("Описание")
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = "Вакансия"
         verbose_name_plural = "Вакансии"
