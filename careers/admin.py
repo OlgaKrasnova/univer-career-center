@@ -15,7 +15,14 @@ class VacanciesAdmin(ImportExportModelAdmin):
 
 
 admin.site.register(Employer)
-admin.site.register(Practice)
+
+
+@admin.register(Practice)
+class PracticeAdmin(ImportExportModelAdmin):
+    list_display = ("title", "description", "id_employer")
+    pass
+
+
 admin.site.register(Events)
 admin.site.register(RequestForPractice)
 admin.site.register(Students)
