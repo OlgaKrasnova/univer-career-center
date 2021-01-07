@@ -10,7 +10,7 @@ admin.site.register(Resume)
 
 @admin.register(Vacancies)
 class VacanciesAdmin(ImportExportModelAdmin):
-    list_display = ("image", "title", "description", "id_employer")
+    list_display = ("image", "title", "description", "status", "id_employer")
     pass
 
 
