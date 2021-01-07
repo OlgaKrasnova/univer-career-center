@@ -46,6 +46,9 @@ class Vacancies(models.Model):
     description = models.TextField("Описание")
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = "Вакансия"
         verbose_name_plural = "Вакансии"
@@ -77,7 +80,7 @@ class Resume(models.Model):
     skills = models.TextField("Навыки")
     date = models.DateTimeField
 
-    id_graduate = models.ForeignKey(Graduate, verbose_name="Образование, степень", on_delete=models.SET_NULL, null=True)
+    id_graduate = models.ForeignKey(Graduate, verbose_name="Выпускник", on_delete=models.SET_NULL, null=True)
     id_vacancy = models.ForeignKey(Vacancies, verbose_name="Вакансия", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
