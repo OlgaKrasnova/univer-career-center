@@ -41,8 +41,10 @@ class PracticeAdmin(ImportExportModelAdmin):
 
 
 admin.site.register(Events)
-admin.site.register(RequestForPractice)
 
+@admin.register(RequestForPractice)
+class RequestAdmin(ImportExportModelAdmin):
+    list_display = ("id_practice", "id_student")
 
 @admin.register(Students)
 class StudentsAdmin(ImportExportModelAdmin):

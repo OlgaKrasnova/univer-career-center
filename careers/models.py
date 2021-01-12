@@ -130,6 +130,9 @@ class Students(models.Model):
     password = models.CharField("Пароль", max_length=150)
 
     id_profession = models.ForeignKey(Profession, verbose_name="Профессия", on_delete=models.SET_NULL, null=True)
+    
+    def __str__(self):
+        return f"{self.name} {self.surname}"
 
     class Meta:
         verbose_name = "Студент"

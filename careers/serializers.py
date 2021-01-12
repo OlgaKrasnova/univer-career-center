@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Vacancies
+from .models import Vacancies, RequestForPractice
 
 
 class VacanciesListSerializer(serializers.ModelSerializer):
@@ -15,3 +15,8 @@ class VacanciesDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacancies
         exclude = ("")
+
+class CreateRequestForPracticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RequestForPractice
+        fields = "__all__"

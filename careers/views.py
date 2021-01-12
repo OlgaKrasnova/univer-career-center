@@ -4,7 +4,7 @@ from django.views.generic.base import View
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import VacanciesListSerializer, VacanciesDetailSerializer
+from .serializers import VacanciesListSerializer, VacanciesDetailSerializer, CreateRequestForPracticeSerializer
 from .models import Vacancies
 
 
@@ -32,3 +32,10 @@ class VacanciesDetailAPIView(APIView):
         vacancy = Vacancies.objects.get(id=pk)
         serializer = VacanciesDetailSerializer(vacancy)
         return Response(serializer.data)
+
+class RequestCreateView(APIView):
+    def post(self, request):
+        requestPractice = CreateRequestForPracticeSerializer(data=request.data)
+        if requestPractice.is_valid():
+            requestPractice.save()
+        return Response(status=201)
