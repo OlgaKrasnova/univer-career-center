@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 
 class DiplomaThesis(models.Model):
@@ -112,7 +113,8 @@ class Practice(models.Model):
     title = models.CharField("Название", max_length=150)
     description = models.TextField("Описание")
     status = models.BooleanField("Статус", default=True)
-
+    start = models.DateField("Дата начала", default=date.today)
+    end = models.DateField("Дата окончания", default=date.today)
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):

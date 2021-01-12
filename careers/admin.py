@@ -1,6 +1,8 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from django.utils.safestring import mark_safe
+
 from .models import DiplomaThesis, Graduate, Resume, Vacancies, Employer, Practice, Events, RequestForPractice, \
     Students, Profession
 
@@ -52,7 +54,11 @@ make_practice_actual.short_description = "Практика актуальна"
 
 @admin.register(Practice)
 class PracticeAdmin(ImportExportModelAdmin):
-    list_display = ("title", "description", "status", "id_employer")
+    list_display = ("title", "start", "end", "description", "status", "id_employer")
+    list_filter = (
+        'status',
+        ('start', DateRangeFilter),
+        )
     actions = [make_practice_not_actual, make_practice_actual]
     pass
 
