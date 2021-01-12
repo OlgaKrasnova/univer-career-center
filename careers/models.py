@@ -43,8 +43,12 @@ class Employer(models.Model):
 class Vacancies(models.Model):
     image = models.ImageField("Изображение", upload_to="media/", null=True)
     title = models.CharField("Название", max_length=150)
+    requirements = models.TextField("Требования", null=True)
     description = models.TextField("Описание")
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = "Вакансия"
@@ -77,7 +81,7 @@ class Resume(models.Model):
     skills = models.TextField("Навыки")
     date = models.DateTimeField
 
-    id_graduate = models.ForeignKey(Graduate, verbose_name="Образование, степень", on_delete=models.SET_NULL, null=True)
+    id_graduate = models.ForeignKey(Graduate, verbose_name="Выпускник", on_delete=models.SET_NULL, null=True)
     id_vacancy = models.ForeignKey(Vacancies, verbose_name="Вакансия", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -118,9 +122,9 @@ class Practice(models.Model):
 
 
 class Students(models.Model):
+    surname = models.CharField("Фамилия", max_length=150)
     name = models.CharField("Имя", max_length=150)
     patronymic = models.CharField("Отчество", max_length=150)
-    surname = models.CharField("Фамилия", max_length=150)
     year_of_issue = models.PositiveSmallIntegerField("Год выпуска", default=0)
     login = models.CharField("Логин", max_length=150)
     password = models.CharField("Пароль", max_length=150)
