@@ -82,7 +82,7 @@ class Resume(models.Model):
     date = models.DateTimeField
 
     id_graduate = models.ForeignKey(Graduate, verbose_name="Выпускник", on_delete=models.SET_NULL, null=True)
-    id_vacancy = models.ForeignKey(Vacancies, verbose_name="Вакансия", on_delete=models.SET_NULL, null=True)
+    id_vacancy = models.ForeignKey(Vacancies, verbose_name="Вакансия", on_delete=models.SET_NULL, null=True, related_name="resume")
 
     def __str__(self):
         return self.title
