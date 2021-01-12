@@ -45,6 +45,7 @@ class Vacancies(models.Model):
     title = models.CharField("Название", max_length=150)
     requirements = models.TextField("Требования", null=True)
     description = models.TextField("Описание")
+    status = models.BooleanField("Статус", default=True)
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -110,6 +111,7 @@ class Events(models.Model):
 class Practice(models.Model):
     title = models.CharField("Название", max_length=150)
     description = models.TextField("Описание")
+    status = models.BooleanField("Статус", default=True)
 
     id_employer = models.ForeignKey(Employer, verbose_name="Работодатель", on_delete=models.SET_NULL, null=True)
 

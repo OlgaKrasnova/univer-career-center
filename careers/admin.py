@@ -15,10 +15,18 @@ class ResumeInline(admin.TabularInline):
     readonly_fields = ("title", "target", "experience", "skills", "id_graduate")
     save_on_top = True
 
+def make_vacancy_not_actual(modeladmin, request, queryset):
+    queryset.update(status=False)
+make_vacancy_not_actual.short_description = "Вакансия не актуальна"
+
+def make_vacancy_actual(modeladmin, request, queryset):
+    queryset.update(status=True)
+make_vacancy_actual.short_description = "Вакансия актуальна"
 
 @admin.register(Vacancies)
 class VacanciesAdmin(ImportExportModelAdmin):
-    list_display = ("get_image", "title", "description", "id_employer")
+    list_display = ("get_image", "title", "description", "status", "id_employer")
+    actions = [make_vacancy_not_actual, make_vacancy_actual]
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} width="60" height="50"')
@@ -33,10 +41,19 @@ class VacanciesAdmin(ImportExportModelAdmin):
 
 admin.site.register(Employer)
 
+def make_practice_not_actual(modeladmin, request, queryset):
+    queryset.update(status=False)
+make_practice_not_actual.short_description = "Практика не актуальна"
+
+def make_practice_actual(modeladmin, request, queryset):
+    queryset.update(status=True)
+make_practice_actual.short_description = "Практика актуальна"
+
 
 @admin.register(Practice)
 class PracticeAdmin(ImportExportModelAdmin):
-    list_display = ("title", "description", "id_employer")
+    list_display = ("title", "description", "status", "id_employer")
+    actions = [make_practice_not_actual, make_practice_actual]
     pass
 
 
