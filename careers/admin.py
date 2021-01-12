@@ -35,7 +35,7 @@ class VacanciesAdmin(ImportExportModelAdmin):
     inlines = [ResumeInline]
 
 
-    list_display = ("image", "title", "description", "status", "id_employer")
+    list_display = ("get_image", "title", "description", "status", "id_employer")
     actions = [make_vacancy_not_actual, make_vacancy_actual]
     pass
 
