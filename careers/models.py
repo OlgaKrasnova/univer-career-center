@@ -4,7 +4,7 @@ from datetime import date
 
 class DiplomaThesis(models.Model):
     title = models.CharField("Название", max_length=150)
-    file = models.FileField
+    file = models.FileField("Пояснительная записка", upload_to="uploads/", null=True)
 
     def __str__(self):
         return self.title
@@ -143,6 +143,9 @@ class Students(models.Model):
 class RequestForPractice(models.Model):
     id_practice = models.ForeignKey(Practice, verbose_name="Практика", on_delete=models.SET_NULL, null=True)
     id_student = models.ForeignKey(Students, verbose_name="Студент", on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.id_practice
 
     class Meta:
         verbose_name = "Заявка"

@@ -16,7 +16,7 @@ class VacanciesView(View):
 
 class VacanciesListAPIView(APIView):
     def get(self, request):
-        vacancies = Vacancies.objects.all()
+        vacancies = Vacancies.objects.order_by("title")
         serializer = VacanciesListSerializer(vacancies, many=True)
         return Response(serializer.data)
 

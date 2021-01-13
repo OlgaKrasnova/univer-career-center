@@ -6,8 +6,20 @@ from django.utils.safestring import mark_safe
 from .models import DiplomaThesis, Graduate, Resume, Vacancies, Employer, Practice, Events, RequestForPractice, \
     Students, Profession
 
-admin.site.register(DiplomaThesis)
-admin.site.register(Graduate)
+
+@admin.register(DiplomaThesis)
+class DiplomaThesisAdmin(ImportExportModelAdmin):
+    list_display = ("title", "file")
+    list_filter = ("title",)
+
+
+@admin.register(Graduate)
+class GraduateAdmin(ImportExportModelAdmin):
+    list_display = ("surname", "name", "patronymic", "id_profession", "year_of_issue")
+    list_filter = ("year_of_issue", "id_profession")
+    search_fields = ("surname", "name")
+
+
 admin.site.register(Resume)
 
 
@@ -17,13 +29,20 @@ class ResumeInline(admin.TabularInline):
     readonly_fields = ("title", "target", "experience", "skills", "id_graduate")
     save_on_top = True
 
+
 def make_vacancy_not_actual(modeladmin, request, queryset):
     queryset.update(status=False)
+
+
 make_vacancy_not_actual.short_description = "Вакансия не актуальна"
+
 
 def make_vacancy_actual(modeladmin, request, queryset):
     queryset.update(status=True)
+
+
 make_vacancy_actual.short_description = "Вакансия актуальна"
+
 
 @admin.register(Vacancies)
 class VacanciesAdmin(ImportExportModelAdmin):
@@ -39,16 +58,22 @@ class VacanciesAdmin(ImportExportModelAdmin):
     inlines = [ResumeInline]
 
 
+@admin.register(Employer)
+class EmployerAdmin(ImportExportModelAdmin):
+    list_display = ("name", "description", "activities")
 
-
-admin.site.register(Employer)
 
 def make_practice_not_actual(modeladmin, request, queryset):
     queryset.update(status=False)
+
+
 make_practice_not_actual.short_description = "Практика не актуальна"
+
 
 def make_practice_actual(modeladmin, request, queryset):
     queryset.update(status=True)
+
+
 make_practice_actual.short_description = "Практика актуальна"
 
 
@@ -58,13 +83,20 @@ class PracticeAdmin(ImportExportModelAdmin):
     list_filter = (
         'status',
         ('start', DateRangeFilter),
-        )
+    )
     actions = [make_practice_not_actual, make_practice_actual]
     pass
 
 
-admin.site.register(Events)
-admin.site.register(RequestForPractice)
+@admin.register(Events)
+class EventsAdmin(ImportExportModelAdmin):
+    list_display = ("title", "description", "date", "id_employer")
+
+
+@admin.register(RequestForPractice)
+class RequestForPracticeAdmin(ImportExportModelAdmin):
+    list_display = ("id_practice", "id_student")
+    pass
 
 
 @admin.register(Students)
@@ -75,4 +107,6 @@ class StudentsAdmin(ImportExportModelAdmin):
     pass
 
 
-admin.site.register(Profession)
+@admin.register(Profession)
+class ProfessionAdmin(ImportExportModelAdmin):
+    list_display = ("title", "description")
