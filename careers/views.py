@@ -4,8 +4,8 @@ from django.views.generic.base import View
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import VacanciesListSerializer, VacanciesDetailSerializer, CreateRequestForPracticeSerializer
-from .models import Vacancies
+from .serializers import VacanciesListSerializer, VacanciesDetailSerializer, CreateRequestForPracticeSerializer, ResumeSerializer
+from .models import Vacancies, Resume
 
 
 class VacanciesView(View):
