@@ -4,8 +4,8 @@ from django.views.generic.base import View
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import VacanciesListSerializer, VacanciesDetailSerializer, CreateRequestForPracticeSerializer, ResumeSerializer
-from .models import Vacancies, Resume
+from .serializers import VacanciesListSerializer, VacanciesDetailSerializer, CreateRequestForPracticeSerializer, ResumeSerializer, CreatePracticeSerializer, DeletePracticeSerializer
+from .models import Vacancies, Resume, Practice
 
 
 class VacanciesView(View):
@@ -39,3 +39,20 @@ class RequestCreateView(APIView):
         if requestPractice.is_valid():
             requestPractice.save()
         return Response(status=201) 
+
+class AddPracticeView(APIView):
+    def post(self, request):
+        serializer = CreatePracticeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=201)
+        else:
+            return Response(status=400)
+
+class DeletePracticeView(APIView):
+    def delete(self, request, pk):
+        serializer = DeletePracticeSerializer(data=pk)
+        if serializer.is_valid():
+            return Response(status=201)
+        else:
+            return Response(status=400)
