@@ -25,7 +25,7 @@ SECRET_KEY = '*81-kttg8(0asq8csa+m^o2_7ly*bh0(czp&ahy(eq^cr1@@x!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['career-center.okrasnova.ru', 'www.career-center.okrasnova.ru', '127.0.0.1']
 
 
 # Application definition
@@ -127,6 +127,8 @@ STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = 'static/'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
